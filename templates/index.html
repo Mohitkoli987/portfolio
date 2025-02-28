@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - IT Student</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+
+        .hero {
+            background: linear-gradient(to right, #4a90e2, #9013fe);
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: white;
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ddd;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .skills div {
+            background: #eee;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .projects {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .projects img {
+            width: 300px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #222;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>Hi, I'm <span>Your Name</span></h1>
+        <p>Aspiring IT Developer | Web Designer | AI Enthusiast</p>
+        <a href="/projects" class="btn">View My Work</a>
+    </header>
+
+    <section class="container">
+        <h2>About Me</h2>
+        <p>I'm a 3rd-year IT student passionate about Python, Flask, and AI. I love building projects that solve real-world problems.</p>
+        <a href="your_resume.pdf" download class="btn">Download Resume</a>
+    </section>
+
+    <section class="container">
+        <h2>Skills</h2>
+        <div class="skills">
+            <div>Python & Flask</div>
+            <div>HTML, CSS, JavaScript</div>
+            <div>Machine Learning</div>
+            <div>MySQL & MongoDB</div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Recent Projects</h2>
+        <div class="projects">
+            <img src="{{ url_for('static', filename='images/project1.jpg') }}" alt="Project 1">
+            <img src="{{ url_for('static', filename='images/project2.jpg') }}" alt="Project 2">
+        </div>
+    </section>
+
+    <footer>
+        <p>Contact: your.email@example.com</p>
+    </footer>
+
+</body>
+</html>
