@@ -601,13 +601,31 @@
   <!-- Navbar -->
   <header class="navbar w-full fixed top-0 z-50" role="banner">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#home" class="text-xl font-bold text-white" aria-label="Home"><span class="text-green-400">></span> Mohit Koli</a>
-      <nav class="navbar-links flex space-x-8" role="navigation" aria-label="Main navigation">
+      <a href="#home" class="text-xl font-bold text-white whitespace-nowrap" aria-label="Home"><span class="text-green-400">></span> Mohit Koli</a>
+      <!-- Hamburger for mobile -->
+      <button id="mobile-menu-btn" class="sm:hidden text-3xl text-green-400 focus:outline-none ml-2" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <!-- Navbar links (hidden on mobile) -->
+      <nav class="navbar-links hidden sm:flex space-x-8" role="navigation" aria-label="Main navigation">
         <a href="#about" class="navbar-link relative" aria-current="page">About</a>
         <a href="#skills" class="navbar-link relative">Skills</a>
         <a href="#projects" class="navbar-link relative">Projects</a>
         <a href="#contact" class="navbar-link relative">Contact</a>
       </nav>
+    </div>
+    <!-- Sidebar for mobile nav -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex justify-end transition-all duration-300 invisible opacity-0 pointer-events-none sm:hidden">
+      <div class="w-64 bg-gray-900 h-full shadow-lg flex flex-col p-6 relative transform translate-x-full transition-transform duration-300" id="sidebar-content">
+        <button id="close-sidebar" class="absolute top-4 right-4 text-2xl text-green-400 focus:outline-none" aria-label="Close menu">&times;</button>
+        <a href="#home" class="text-2xl font-bold text-white mb-8 mt-2 whitespace-nowrap"><span class="text-green-400">></span> Mohit Koli</a>
+        <nav class="flex flex-col space-y-6 mt-8">
+          <a href="#about" class="navbar-link text-lg">About</a>
+          <a href="#skills" class="navbar-link text-lg">Skills</a>
+          <a href="#projects" class="navbar-link text-lg">Projects</a>
+          <a href="#contact" class="navbar-link text-lg">Contact</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -626,8 +644,8 @@
         <a href="https://github.com/Mohitkoli987" target="_blank" class="text-white hover:text-green-400" aria-label="Link"><i class="fab fa-github text-3xl"></i></a>
       </div>
       <div class="flex justify-center space-x-4 mt-8">
-        <a href="#projects" class="cta-btn neon-border px-10 py-4 text-xl font-bold">View Projects</a>
-        <a href="#contact" class="cta-btn neon-border px-10 py-4 text-xl font-bold">Contact Me</a>
+        <a href="#projects" class="cta-btn neon-border px-6 py-2 sm:px-10 sm:py-4 text-base sm:text-xl font-bold">View Projects</a>
+        <a href="#contact" class="cta-btn neon-border px-6 py-2 sm:px-10 sm:py-4 text-base sm:text-xl font-bold">Contact Me</a>
       </div>
     </div>
     <!-- Scroll-down Chevron -->
@@ -1357,6 +1375,54 @@
       document.getElementById('chatbot-btn').addEventListener('click', () => {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       });
+
+      // Mobile sidebar nav logic
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileSidebar = document.getElementById('mobile-sidebar');
+      const sidebarContent = document.getElementById('sidebar-content');
+      const closeSidebar = document.getElementById('close-sidebar');
+      // Open sidebar
+      if (mobileMenuBtn && mobileSidebar) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileSidebar.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+          sidebarContent.classList.remove('translate-x-full');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+      // Close sidebar
+      if (closeSidebar && mobileSidebar) {
+        closeSidebar.addEventListener('click', () => {
+          sidebarContent.classList.add('translate-x-full');
+          setTimeout(() => {
+            mobileSidebar.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+          }, 300);
+        });
+      }
+      // Close sidebar when clicking outside
+      if (mobileSidebar) {
+        mobileSidebar.addEventListener('click', (e) => {
+          if (e.target === mobileSidebar) {
+            sidebarContent.classList.add('translate-x-full');
+            setTimeout(() => {
+              mobileSidebar.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+              document.body.style.overflow = '';
+            }, 300);
+          }
+        });
+      }
+      // Sidebar nav links close sidebar on click
+      if (sidebarContent) {
+        sidebarContent.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            sidebarContent.classList.add('translate-x-full');
+            setTimeout(() => {
+              mobileSidebar.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+              document.body.style.overflow = '';
+            }, 300);
+          });
+        });
+      }
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
